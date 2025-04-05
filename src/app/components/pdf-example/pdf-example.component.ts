@@ -4,13 +4,16 @@ import { PdfMakeService } from '../../services/pdfmake.service';
 import { Calls } from '../../models';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pdf-example',
   templateUrl: './pdf-example.component.html',
   styleUrls: ['./pdf-example.component.css'],
   standalone: true,
+  imports: [CommonModule]
 })
+
 export class PdfExampleComponent {
   @Input() call!: Calls;
   selectedFile: File | null = null;

@@ -1,1 +1,75 @@
-<app-pdf-example></app-pdf-example>
+<div class="app-container">
+  <header class="app-header">
+    <h1>{{ title }}</h1>
+    <p class="tagline">Convert your Word documents to PDF with ease</p>
+  </header>
+
+  <main class="app-content">
+    <div class="converter-panel">
+      <div class="upload-section">
+        <h2>Upload Document</h2>
+        <p class="helper-text">Select a DOCX file to convert to PDF</p>
+
+        <input
+          type="file"
+          #fileInput
+          (change)="onFileSelected($event)"
+          accept=".docx"
+          hidden
+        />
+
+        <div class="action-buttons">
+          <button
+            class="btn btn-primary btn-select-file"
+            (click)="fileInput.click()"
+          >
+            <i class="file-icon">📄</i> Select DOCX File
+          </button>
+
+          <button
+            class="btn btn-success btn-convert"
+            (click)="convertToPdf()"
+            [disabled]="!selectedFile || isLoading"
+          >
+            <span *ngIf="!isLoading">Convert to PDF</span>
+            <span *ngIf="isLoading" class="loading-text">
+              <span class="spinner"></span> Converting...
+            </span>
+          </button>
+        </div>
+
+        <div *ngIf="selectedFile" class="file-info mt-3">
+          <strong>Selected file:</strong>
+          <span class="file-name">{{ selectedFile.name }}</span>
+          <span class="file-size"
+            >({{ (selectedFile.size / 1024).toFixed(1) }} KB)</span
+          >
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+          {{ errorMessage }}
+        </div>
+      </div>
+
+      <div class="pdf-preview-container" *ngIf="pdfPreviewUrl && !isLoading">
+        <div class="preview-header">
+          <h5>PDF Preview</h5>
+          <button class="btn btn-primary btn-download" (click)="downloadPdf()">
+            <i class="download-icon">⬇️</i> Download PDF
+          </button>
+        </div>
+        <iframe
+          [src]="pdfPreviewUrl"
+          class="pdf-iframe"
+          title="PDF Preview"
+        ></iframe>
+      </div>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>&copy; 2025 DOCX to PDF Converter</p>
+  </footer>
+</div>
+
+<router-outlet></router-outlet>

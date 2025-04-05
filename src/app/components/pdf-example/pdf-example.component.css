@@ -3,27 +3,149 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
   .modal-header {
     margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .modal-title {
+      margin: 0;
+      color: #343a40;
+      font-weight: 600;
+    }
+    
+    .file-info {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #6c757d;
+      
+      .file-name {
+        font-weight: 500;
+        margin-right: 5px;
+      }
+      
+      .file-size {
+        color: #adb5bd;
+      }
+    }
   }
-
+  
   .modal-body {
     flex: 1;
     display: flex;
     flex-direction: column;
-  }
-
-  .pdf-preview-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-
-    .pdf-iframe {
+    
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      
+      .btn-select-file {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        
+        .file-icon {
+          font-size: 1.2rem;
+        }
+      }
+      
+      .btn-convert {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        
+        .loading-text {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          
+          .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+          }
+        }
+      }
+    }
+    
+    .pdf-preview-container {
       flex: 1;
-      width: 100%;
-      border: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
       background: white;
+      border-radius: 4px;
+      border: 1px solid #dee2e6;
+      overflow: hidden;
+      
+      .preview-header {
+        padding: 10px 15px;
+        background-color: #f1f3f5;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #dee2e6;
+        
+        h5 {
+          margin: 0;
+          font-weight: 500;
+        }
+        
+        .btn-download {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 0.9rem;
+          padding: 5px 10px;
+          
+          .download-icon {
+            font-size: 1.1rem;
+          }
+        }
+      }
+      
+      .pdf-iframe {
+        flex: 1;
+        width: 100%;
+        border: none;
+        min-height: 500px;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .pdf-modal-container {
+    .modal-header {
+      flex-direction: column;
+      align-items: flex-start;
+      
+      .file-info {
+        margin-top: 10px;
+      }
+    }
+    
+    .modal-body {
+      .action-buttons {
+        flex-direction: column;
+      }
     }
   }
 }

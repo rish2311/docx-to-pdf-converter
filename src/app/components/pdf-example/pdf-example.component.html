@@ -1,0 +1,28 @@
+<div class="pdf-modal-container">
+  <div class="modal-header">
+    <h4>Generate PDF for Call ID: {{call?.id}}</h4>
+  </div>
+
+  <div class="modal-body">
+    <input type="file" #fileInput (change)="onFileSelected($event)" accept=".docx" hidden>
+    <button class="btn btn-primary" (click)="fileInput.click()">
+      Select DOCX File
+    </button>
+
+    <button class="btn btn-success ms-2" 
+            (click)="convertToPdf()" 
+            [disabled]="!selectedFile || isLoading">
+      <span *ngIf="!isLoading">Convert to PDF</span>
+      <span *ngIf="isLoading">Converting...</span>
+    </button>
+
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
+
+    <div class="pdf-preview-container mt-3" *ngIf="pdfPreviewUrl && !isLoading">
+      <iframe [src]="pdfPreviewUrl" class="pdf-iframe"></iframe>
+      <button class="btn btn-primary mt-2" (click)="downloadPdf()">Download PDF</button>
+    </div>
+  </div>
+</div>
